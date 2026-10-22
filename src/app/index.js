@@ -1,8 +1,6 @@
-import { Text } from "react-native";
-
-const ARTWORK =
-"https://raw.githubusercontent.com/PokeAPI/sprites" +
-"/master/sprites/pokemon/other/official-artwork/";
+import { ScrollView, StyleSheet, Text } from "react-native";
+import PokemonCard from "../components/PokemonCard";
+import Titre from "../components/Titre";
 
 const POKEMONS = [
   { number: 1, name: "Bulbizarre", type: "Plante" },
@@ -13,10 +11,25 @@ const POKEMONS = [
   { number: 43, name: "Mystherbe", type: "Plante" },
 ];
 
-
-
 export default function Index() {
   return (
-      <Text>Mon POKEDEX</Text>
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <Titre texte="Mon Pokédex" />
+      <Text>{POKEMONS.length} Pokémon</Text>
+      {POKEMONS.map((p) => (
+        <PokemonCard
+          key={p.number}
+          number={p.number}
+          name={p.name}
+          type={p.type}
+        />
+      ))}
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollView: {
+    padding: 16, gap: 12
+  }
+})
